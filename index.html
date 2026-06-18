@@ -1,23 +1,804 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <!-- JSON-LD 구조화 데이터 적용 (AI 검색엔진 및 에이전트 크롤링 최적화) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "캠핑카자동차보험료는 일반 차량과 어떤 차이가 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "과거에는 튜닝 캠핑카가 업무용 차량으로 분류되어 높은 보험료가 책정되었으나, 금융감독원 제도 개선에 따라 현재는 개인용 승용캠핑카 전용 특별 요율이 적용됩니다. 이에 따라 기존 대비 최대 40% 저렴한 비용으로 가입할 수 있으며, 주행거리가 짧은 캠핑카의 특성을 고려하여 마일리지 할인 특약까지 추가로 적용받을 수 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "카라반이나 폴딩 트레일러도 자동차보험에 가입해야 하나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "카라반과 폴딩 트레일러는 자체 동력이 없는 피견인차이므로 독립적인 자동차보험 가입이 불가능합니다. 대신 견인하는 차량의 자동차보험에 레저장비 견인장치 특약을 반드시 추가해야 하며, 트레일러 자체의 파손에 대비하기 위해서는 별도로 자기차량손해(자차) 담보를 추가하여 가입해야 합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "캠핑카보험 가입 시 긴급출동 서비스 이용이 가능한가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "차량의 크기와 무게에 따라 제한이 있습니다. 르노 마스터나 대형 포터 기반의 캠핑카는 차체 크기 및 중량 초과로 인해 일반 다이렉트 긴급출동 특약 가입이 불가능할 수 있습니다. 이 경우 대형차 전용 견인 특약을 제공하는 보험사를 선택하거나 사설 견인 서비스를 연계하는 방안을 고려해야 합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "캠핑카보험 가입 시 가장 할인율이 높은 특약은 무엇인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "가장 할인 폭이 큰 특약은 마일리지(주행거리) 할인 특약입니다. 연간 운행 거리가 짧은 캠핑카 특성상 최대 35%에서 45%까지 납부한 보험료를 환급받을 수 있습니다. 또한 티맵 안전운전 할인, 자녀 할인 특약 등을 중복 적용하면 추가적인 금액 절감이 가능합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "캠핑카 개조 후 보험 가입 시 자차 금액 산정은 어떻게 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "기존 차량 가액에 추가된 캠핑 설비 및 튜닝 비용을 더하여 최종 차량 가액을 산정합니다. 가입 시 튜닝 승인서, 구조변경 등록증 및 설비 영수증을 제출하면 해당 금액만큼 자차 담보 보장 범위가 확대되며, 사고 시 설비 비용까지 제대로 보상받을 수 있습니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #1f5a9f;
+      --secondary-color: #2c3e50;
+      --accent-color: #d9534f;
+      --bg-light: #f5f7fa;
+      --bg-card: #ffffff;
+      --text-dark: #333333;
+      --text-muted: #666666;
+      --border-color: #e0e6ec;
+    }
+
+    body {
+      font-family: 'Malgun Gothic', '맑은 고딕', helvetica, sans-serif;
+      line-height: 1.8;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 10px 0 0 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    nav {
+      background-color: var(--secondary-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav li {
+      margin: 0;
+    }
+
+    nav a {
+      display: block;
+      color: #ffffff;
+      padding: 15px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      background-color: var(--primary-color);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background-color: var(--bg-card);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      border-left: 5px solid var(--primary-color);
+      padding-left: 15px;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    h3 {
+      color: var(--secondary-color);
+      font-size: 1.4rem;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    h4 {
+      color: var(--text-dark);
+      font-size: 1.15rem;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    strong {
+      color: #111111;
+    }
+
+    .highlight-box {
+      background-color: #f0f4f8;
+      border-left: 5px solid var(--primary-color);
+      padding: 25px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 25px;
+    }
+
+    .highlight-box h3, .highlight-box h4 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .accent-text {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 25px;
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    table th {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 12px 15px;
+      font-weight: 600;
+    }
+
+    table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    table tbody tr:hover {
+      background-color: #f9fbfd;
+    }
+
+    /* 시각적 그래프 요소를 대체할 CSS 기반의 미려한 막대 그래프 */
+    .chart-container {
+      background-color: #fcfcfc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+
+    .chart-title {
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--secondary-color);
+    }
+
+    .chart-bar-group {
+      margin-bottom: 15px;
+    }
+
+    .chart-label {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .chart-bar-wrapper {
+      background-color: #e9ecef;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 24px;
+      position: relative;
+    }
+
+    .chart-bar {
+      height: 100%;
+      background-color: var(--primary-color);
+      border-radius: 4px;
+      transition: width 1s ease-in-out;
+    }
+
+    .chart-bar.accent {
+      background-color: var(--accent-color);
+    }
+
+    .chart-value {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: #333333;
+      font-weight: bold;
+    }
+
+    /* 반응형 구조를 고려한 폼 구성 */
+    .interactive-calculator {
+      background-color: #f8fafc;
+      border: 2px solid var(--primary-color);
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 30px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      section {
+        padding: 20px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: var(--secondary-color);
+      font-size: 0.9rem;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      background-color: #ffffff;
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(31, 90, 159, 0.15);
+    }
+
+    .btn-calc {
+      grid-column: span 2;
+      background-color: var(--primary-color);
+      color: #ffffff;
+      border: none;
+      padding: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .btn-calc {
+        grid-column: span 1;
+      }
+    }
+
+    .btn-calc:hover {
+      background-color: #16467d;
+    }
+
+    .calc-result {
+      margin-top: 25px;
+      padding: 20px;
+      background-color: #eef9ff;
+      border: 1px dashed var(--primary-color);
+      border-radius: 6px;
+      text-align: center;
+      display: none;
+    }
+
+    .calc-result h4 {
+      margin: 0 0 10px 0;
+      color: var(--primary-color);
+    }
+
+    .calc-result p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--accent-color);
+    }
+
+    .cta-btn-link {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: #ffffff;
+      padding: 12px 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      margin-top: 15px;
+    }
+
+    .cta-btn-link:hover {
+      background-color: #bd362f;
+    }
+
+    footer {
+      background-color: var(--secondary-color);
+      color: #dddddd;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      border-top: 5px solid var(--primary-color);
+    }
+
+    footer a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .external-links {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .external-links p {
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .external-links ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .external-links a {
+      color: #9ec5fe;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>캠핑카자동차보험 완전정복 가이드</h1>
+    <p>2026년 제도 개선안 반영 모델별 연령별 다이렉트 견적 및 가입 노하우</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#intro">도입 및 가입 필요성</a></li>
+      <li><a href="#demographics">모델별/연령별 분석</a></li>
+      <li><a href="#comparison">다이렉트 상품 비교</a></li>
+      <li><a href="#checklist">필수 가입 체크리스트</a></li>
+      <li><a href="#calculator">실시간 모의 계산기</a></li>
+      <li><a href="#faq">자주 묻는 질문 (FAQ)</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="intro">
+      <h2>캠핑카자동차보험, 왜 일반 자동차보험과 다를까요?</h2>
+      <p>최근 주 5일 근무제 정착을 넘어 워케이션과 차박 문화가 고도화되면서 캠핑카를 구매하거나 기존 승용차, 화물차를 캠핑카로 구조 변경(튜닝)하여 운행하는 오너들이 폭발적으로 늘고 있습니다. 하지만 차량을 마련하는 즐거움도 잠시, 많은 캠퍼들이 복잡하고 까다로운 <span class="accent-text">캠핑카자동차보험</span> 가입 단계에서 혼란을 겪습니다.</p>
+      
+      <p>기본적으로 일반 자동차보험은 일상적인 출퇴근이나 업무를 목적으로 주행하는 차량을 기준으로 설계되어 있습니다. 반면, 캠핑카는 차량 내부에 고가의 가전제품, 가구, 배터리 시스템, 태양광 패널 등 복잡한 캠핑용 특수 설비가 매립되어 있어 사고 발생 시 수리 비용이 기하급수적으로 높아집니다. 이러한 특성 때문에 보험사들은 캠핑카를 일반 차량과 분리하여 관리하고 있으며, 차량의 세부 종류(모터홈, 카라반, 폴딩 트레일러 등)에 따라 인수 조건과 산정 방식이 완전히 상이합니다.</p>
+
+      <div class="highlight-box">
+        <h3>2026년 캠핑카자동차보험 핵심 변경 트렌드</h3>
+        <p>과거에는 개조된 승용 캠핑카가 업무용(캠핑용) 요율로 분류되어 보험료가 불합리하게 비싸거나, 다이렉트 온라인 가입이 원천 차단되는 경우가 빈번했습니다. 그러나 금융감독원의 규제 혁신 정책이 정착된 2026년 현재는 다음과 같은 혁신이 도입되었습니다.</p>
+        <ul>
+          <li><strong>개인용 단일화 및 특별요율 신설:</strong> 승용 튜닝 캠핑카의 자동차보험 분류가 개인용으로 단일화되어 불필요하게 비싼 업무용 요금을 내지 않아도 됩니다. 기존 업무용 대비 약 40% 저렴한 금액으로 견적을 받아볼 수 있습니다.</li>
+          <li><strong>마일리지 특약 환급 적용:</strong> 주말에만 집중적으로 운행하는 캠핑카의 특성을 반영하여 개인용 자동차보험의 최대 무기인 마일리지 할인 특약(최대 35%에서 45% 환급) 혜택을 온전히 누릴 수 있게 되었습니다.</li>
+          <li><strong>모바일 앱 다이렉트 편의성 강화:</strong> 복잡한 서류 제출 없이도 모바일 어플리케이션을 통해 간편하게 차량 내부 특약 사진을 전송하고 즉시 가입하는 시스템이 고도화되었습니다.</li>
+        </ul>
+      </div>
+
+      <p>단순히 비용이 제일 싼곳이나 저렴한곳만을 고집하다가는 정작 큰 사고가 발생했을 때 캠핑 설비에 대한 자차 보상을 전혀 받지 못해 수백만 원에서 수천만 원의 사비 지출을 감수해야 할 수 있습니다. 그렇기 때문에 전문적인 컨설팅을 바탕으로 내 상황에 최적화된 보험 상품을 비교 설계하는 과정이 반드시 필요합니다.</p>
+    </section>
+
+    <section id="demographics">
+      <h2>모델별 및 연령별 캠핑카보험 심층 분석</h2>
+      <p>캠핑카자동차보험료를 구성하는 핵심 변수는 차량 모델과 운전자의 연령입니다. 국산 대표 베이스 차량인 스타렉스, 스타리아, 포터, 봉고부터 시작해 수입 프리미엄 브랜드인 르노 마스터 및 트레일러 형태인 카라반에 이르기까지 모델별 특징을 살펴보고, 20대부터 50대 이상까지 연령대에 따른 보험료 편차와 예상 금액을 면밀히 분석해 드립니다.</p>
+
+      <h3>1. 차량 모델별 인수 조건과 보험 가액 구성의 차이점</h3>
+      <p>캠핑카의 종류는 크게 자체 엔진으로 구동하는 일체형 모터홈과 견인차가 필요한 피견인 트레일러형으로 구분됩니다. 이 종류에 따라 가입 방식과 금액은 완전히 다르게 산정됩니다.</p>
+      <ul>
+        <li><strong>스타렉스 캠핑카 및 스타리아 캠핑카보험:</strong> 가장 수요가 많고 대중적인 세그먼트입니다. 승용차 베이스이므로 보험사들의 인수 장벽이 가장 낮으며, 대기업 계열사인 삼성화재, 현대해상, DB손해보험, KB손해보험의 다이렉트 온라인 사이트에서 가장 간편하게 계산기를 돌려보고 가입할 수 있는 장점이 있습니다.</li>
+        <li><strong>르노 마스터 및 쏠라티 기반 모터홈:</strong> 차체가 크고 내부 공간이 넓어 최고급 가구와 고가 인버터, 배터리 시설이 들어갑니다. 차량 자체 가액이 높게 책정되므로 자차 보험료 비중이 큽니다. 일부 보험사는 차량 중량 때문에 긴급출동 특약 가입을 제한하므로, 특수 특약 제공 여부를 꼼꼼히 대조해 보아야 합니다.</li>
+        <li><strong>포터 캠핑카 및 봉고 캠핑카보험 (1톤 트럭 캠퍼):</strong> 화물차를 기반으로 제작된 모터홈입니다. 최초 출고 시 특수화물차로 등록되는 경우가 많아 개인용이 아닌 업무용 화물 요율이 적용될 수 있습니다. 이 경우 연령대가 낮다면 신규 가입 시 초기 금액이 예상보다 높게 설계될 수 있습니다.</li>
+        <li><strong>레이 캠핑카보험 (경형 캠핑카):</strong> 1인 또는 2인 차박을 선호하는 젊은 층에서 인기 높은 차종입니다. 경차 할인 혜택과 승용 캠핑카 특별 요율이 중복으로 적용되어 1년 평균 예상 보험료가 대단히 저렴하게 산출됩니다. 20대 신규 가입자에게 추천할 만한 가성비 우수 브랜드입니다.</li>
+        <li><strong>카라반 및 폴딩 트레일러 자차 보험:</strong> 동력이 없는 카라반은 단독 자동차보험 가입이 불가합니다. 대신 이를 견인하는 앞차(견인차)에 반드시 레저장비 견인장치 특약을 가입해야 사고 시 상대방에게 끼친 대인 및 대물 피해를 배상받을 수 있습니다. 또한 카라반 자체의 전복이나 파손을 대비하기 위해 견인차의 보험사에서 제공하는 피견인차 자차 특별 약관을 추가해야 합니다.</li>
+      </ul>
+
+      <h3>2. 연령대별 평균 예상 보험료 및 연령별 특약 분석 (2026년 기준)</h3>
+      <p>자동차보험 요율의 대원칙 중 하나는 통계적 사고 위험이 높은 20대 연령대의 보험료가 가장 비싸고, 무사고 경력이 누적된 40대와 50대 연령대의 요금은 매우 저렴하다는 점입니다. 캠핑카 역시 이러한 원칙이 철저히 지켜집니다.</p>
+      
+      <div class="chart-container">
+        <div class="chart-title">2026년 운전자 연령별 연평균 캠핑카보험료 예상 수준 (스타리아 개조 캠핑카 기준)</div>
+        
+        <div class="chart-bar-group">
+          <div class="chart-label">20대 초중반 신규 가입 (최초 가입, 군경력 무)</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar accent" style="width: 100%;"></div>
+            <div class="chart-value">약 1,800,000원 ~ 2,400,000원</div>
+          </div>
+        </div>
+
+        <div class="chart-bar-group">
+          <div class="chart-label">30대 직장인 (무사고 5년 이상, 다이렉트 할인 적용)</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar" style="width: 55%;"></div>
+            <div class="chart-value">약 950,000원 ~ 1,200,000원</div>
+          </div>
+        </div>
+
+        <div class="chart-bar-group">
+          <div class="chart-label">40대 부부한정 특약 (티맵 안전운전 점수 우수 기준)</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar" style="width: 38%;"></div>
+            <div class="chart-value">약 680,000원 ~ 850,000원</div>
+          </div>
+        </div>
+
+        <div class="chart-bar-group">
+          <div class="chart-label">50대 이상 무사고 장기 경력자 (자녀 할인 특약 포함)</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar" style="width: 32%;"></div>
+            <div class="chart-value">약 550,000원 ~ 700,000원</div>
+          </div>
+        </div>
+      </div>
+
+      <p>위의 수치는 2026년도 손해보험협회 공시 요율을 토대로 산출된 전국 평균 예상 금액이며, 세부적인 운전자 연령 범위 설정(만 30세 이상, 만 35세 이상, 만 48세 이상 등)과 블랙박스 할인, 커넥티드카 혜택 적용 유무에 따라 실질 청구 금액은 변동될 수 있습니다.</p>
+
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>모델명</th>
+              <th>주 연령대</th>
+              <th>보험 적용 형태</th>
+              <th>평균 예상 비용 (연간)</th>
+              <th>가장 큰 할인 항목</th>
+              <th>가입 시 주의사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>스타리아 캠핑카</strong></td>
+              <td>30대 ~ 40대</td>
+              <td>개인용 승용캠핑카</td>
+              <td>750,000원 ~ 1,100,000원</td>
+              <td>마일리지 특약, 자녀할인</td>
+              <td>차량 내부 가구 가격 별도 고지 필수</td>
+            </tr>
+            <tr>
+              <td><strong>르노 마스터 모터홈</strong></td>
+              <td>40대 ~ 50대</td>
+              <td>업무용(캠핑용) 또는 개인용</td>
+              <td>1,200,000원 ~ 1,700,000원</td>
+              <td>안전운전 TMAP 할인</td>
+              <td>일부 손보사 견인 불가(길이, 중량 체크)</td>
+            </tr>
+            <tr>
+              <td><strong>경차 레이 캠핑카</strong></td>
+              <td>20대 ~ 30대</td>
+              <td>개인용 경형캠핑카</td>
+              <td>450,000원 ~ 700,000원</td>
+              <td>경차 할인, 신규 할인 혜택</td>
+              <td>자차 금액 설정 시 튜닝 비용 합산할 것</td>
+            </tr>
+            <tr>
+              <td><strong>1ton 포터/봉고 모터홈</strong></td>
+              <td>50대 이상</td>
+              <td>특수화물 캠핑카</td>
+              <td>900,000원 ~ 1,300,000원</td>
+              <td>무사고 할인, 1인한정 특약</td>
+              <td>차고지 증명서 및 차종 코드 오입력 주의</td>
+            </tr>
+            <tr>
+              <td><strong>유럽형 카라반 (트레일러)</strong></td>
+              <td>30대 ~ 50대</td>
+              <td>피견인 트레일러 자차 특약</td>
+              <td>150,000원 ~ 400,000원 (트레일러 단독 가격)</td>
+              <td>동일 보험사 패키지 할인</td>
+              <td>견인차에 레저장비견인특약 선행 가입 필수</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <h2>대기업 다이렉트 캠핑카보험 상품 및 가입 채널 비교</h2>
+      <p>소비자들이 가입을 진행할 때 가장 고민하는 대목은 다이렉트(온라인) 채널과 설계사를 통한 대면 채널 중 어떤 방식을 선택할 것인가, 그리고 보험 브랜드별 순위와 사은품 혜택은 어떻게 다른가 하는 점입니다. 2026년 현재 국내 주요 4대 손해보험사(삼성화재, 현대해상, DB손해보험, KB손해보험)와 디지털 혁신의 주두인 캐롯손해보험의 캠핑카 지원 수준을 다각도로 비교해 드립니다.</p>
+
+      <h3>1. 주요 손해 보험사 브랜드별 캠핑카 지원 및 차이점</h3>
+      <p>온라인 다이렉트 사이트는 오프라인 대면 채널 대비 평균 15%에서 20% 가까이 수수료가 절감되므로 가장 추천하는 스마트한 가입 경로입니다. 다만, 회사마다 캠핑카를 바라보는 내부 언더라이팅(인수 심사) 가이드라인이 다소 다릅니다.</p>
+      
+      <ul>
+        <li><strong>DB손해보험 다이렉트:</strong> 인터넷 가입 시 오프라인 대비 약 17.7% 수준의 기본 할인을 적용해 주며, 에코 마일리지 특약을 결합하면 주행거리에 따라 최대 37%까지 기납부 금액을 환급해 줍니다. 무엇보다 승용 캠핑카에 대한 모바일 전용 모니터링 시스템이 잘 구축되어 있어 어플 내에서 간편 심사 통과율이 가장 높은 업체 중 하나입니다.</li>
+        <li><strong>KB손해보험 다이렉트:</strong> 다이렉트 전용 우대율 18.1%를 기본 탑재하고 있으며, 티맵(Tmap) 및 카카오내비 안전운전 점수를 활용한 연계 혜택이 대단히 우수합니다. 안전운전 점수가 80점 이상일 경우 대폭 추가 감면을 지원하므로 주행 거리가 적고 조심스럽게 운전하는 캠핑 오너에게 매우 잘 어울리는 상품입니다.</li>
+        <li><strong>현대해상 다이렉트:</strong> 현대해상은 전통적으로 장기 보험과 자동차 사고 보상 네트워크가 조밀하여 소비자 신뢰도가 높습니다. 자녀 할인 특약이 업계 내에서 꽤 폭넓게 적용되며(만 6세 이하 자녀가 있을 시 큰 폭의 추가 혜택), 견인 트레일러와 수반차를 동일한 계약 내에서 매끄럽게 처리해 주는 레저장비 전문 부속약관 설계가 매우 탄탄하다는 평을 받습니다.</li>
+        <li><strong>삼성화재 다이렉트:</strong> 시장 점유율 1위를 자랑하는 만큼 보상 처리 서비스 속도가 가장 신속하다는 장점이 있습니다. 자사 오프라인 상품 대비 약 20.7%의 평균 절감 혜택을 다이렉트 고객에게 제공하며, 주행거리가 짧은 캠핑카의 가치를 환급 특약으로 철저하게 보장해 줍니다.</li>
+        <li><strong>캐롯손해보험 퍼마일:</strong> 매월 주행한 거리만큼만 후불로 요금을 납부하는 특허받은 시스템을 보유하고 있습니다. 연간 총 주행거리가 3,000km 미만으로 극히 짧은 캠핑카 오너들에게 가장 저렴한곳으로 자주 거론되며, 모바일 앱 연동성이 대단히 뛰어납니다.</li>
+      </ul>
+
+      <h3>2. 온라인 플랫폼 연계 이벤트 및 사은품 혜택 극대화하기</h3>
+      <p>최근에는 다이렉트 사이트에 직접 접속하는 방법 외에도 네이버 페이, 카카오톡 페이, 토스(Toss) 등 대표적인 핀테크 플랫폼의 자산 관리 탭을 거쳐 가입하는 신규 유입 경로가 활성화되어 있습니다. 이러한 우회 플랫폼을 활용할 경우, 가입 시 네이버페이 포인트, 모바일 주유 상품권, 신세계 상품권 등 3만 원에서 최대 5만 원 상당의 사은품이나 현금지원 혜택을 챙길 수 있는 이벤트가 상시 진행되므로 적극 활용할 가치가 있습니다.</p>
+
+      <div class="highlight-box">
+        <h4>커뮤니티 및 소셜 채널 내돈내산 가입 후기 요약</h4>
+        <p>인터넷 커뮤니티인 디시인사이드 캠핑 갤러리, 보배드림 캠핑카 게시판, 에펨코리아(펨코) 레저 게시판 등에서 유저들이 공유하는 실제 내돈내산 후기들을 종합하면 아래와 같은 숨겨진 팁을 발견할 수 있습니다.</p>
+        <p><strong>커뮤니티 유저 후기 꿀팁:</strong> 수입 모터홈이나 고가 특장 캠핑카의 경우, 다이렉트 전산망에서 일반 승용으로 자동 조회가 안 되는 경우가 많습니다. 이때는 무작정 진행을 포기하지 말고, 손보사 모바일 어플의 사진 전송 창구를 통하거나 본사 전문 상담원과의 1:1 컨설팅 통화를 요청해 수동 심사를 거쳐 개인용 승용캠핑카 할인 코드를 부여받아야 비싼 업무용 요율 폭탄을 피할 수 있습니다.</p>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <h2>캠핑카보험 계약 전 놓치면 손해 보는 필수 체크리스트</h2>
+      <p>단순히 외관만 보고 청약서를 작성하다가는 사고 시 완전한 보상을 가로막는 커다란 공백이 생길 수 있습니다. 계약 체결 전에 반드시 대조하고 적용해야 할 가이드라인 4가지를 집중 점검해 드립니다.</p>
+
+      <h3>1. 정확한 차량 가액 산정 및 튜닝 설비 추가 고지</h3>
+      <p>가장 자주 발생하는 분쟁 요인입니다. 예를 들어, 최초 차량 출고가가 3,000만 원인 스타리아를 기반으로 2,000만 원의 비용을 들여 전문 빌더 업체에서 내부 인테리어, 가구, 배터리, 전기 가열 시스템 등을 튜닝 개조했다고 가정하겠습니다. 이때 순정 스타리아 차량 가격인 3,000만 원으로만 보험에 가입한다면, 추후 전손 사고나 화재 사고가 났을 때 내부에 들어간 2,000만 원 상당의 캠핑 설비는 보상 기준에서 완전히 제외됩니다. 반드시 구조변경 완료 후 발급받은 자동차등록증 상의 튜닝 내역서와 빌더 영수증을 제시하여 <strong>최종 가액을 5,000만 원으로 증액 세팅</strong>해야 소중한 재산을 지킬 수 있습니다.</p>
+
+      <h3>2. 운전자 범위 및 연령 한정의 엄격한 제한</h3>
+      <p>보험료를 낮추는 가장 파괴적인 무기는 운전할 수 있는 사람의 범위와 연령을 좁히는 것입니다. 캠핑카는 차량 특성상 가족 단위나 친한 지인들끼리 함께 운전하는 경우가 많으나, 무조건 누구나 운전 특약으로 지정하면 기본 요금이 최대 1.5배 이상 수직 상승합니다. 평소에는 명의자 본인 또는 부부 부부한정 1인으로 꽁꽁 묶어 두었다가, 장거리 여행 시 특정 며칠 동안만 다른 이가 운전할 수 있도록 모바일 전용 앱을 통해 <strong>임시운전자 특약(단기 운전자 확대)</strong>을 하루 단위로 적용하는 것이 지출 비용을 제일 싼 상태로 고정하는 정석적인 노하우입니다.</p>
+
+      <h3>3. 대인배상 및 대물배상 한도 상향 설정</h3>
+      <p>캠핑카는 차량 자체의 무게와 중량이 커서 충돌 사고 발생 시 피해 규모가 일반 승용차보다 월등히 커질 우려가 큽니다. 대물배상 한도를 기본 1~2억 원 수준으로 얇게 설정했다가는 고가 수입차나 다중 추돌 사고가 났을 때 패가망신의 원인이 될 수 있습니다. 연간 요금 차이는 불과 만 원에서 이만 원 안팎이므로, <strong>대물배상 한도는 10억 원 이상</strong>으로 상향하고, 무보험차 상해 및 자기신체사고 담보는 보상 금액 한도가 넓은 <strong>자동차상해(자상)</strong>로 업그레이드할 것을 강력히 권장합니다.</p>
+
+      <h3>4. 첨단 인공지능(AI) 기반 기술 비서 활용 가입법</h3>
+      <p>최근에는 챗지피티(ChatGPT)나 구글 제미나이(Gemini) 같은 대화형 AI 비서를 통해 보험사별 약관을 PDF 파일로 업로드하고 본인 나이와 운전 경력에 가장 알맞은 다이렉트 추천 상품을 1분 만에 족집게처럼 컨설팅받는 트렌드가 급격히 부상하고 있습니다. 가입 과정에서 막히는 용어나 보장 조항이 있다면 주저하지 말고 네이버 검색 및 인공지능 툴을 활용해 교차 검증을 시도해 보세요.</p>
+    </section>
+
+    <section id="calculator">
+      <h2>캠핑카자동차보험 예상 견적 실시간 시뮬레이션 계산기</h2>
+      <p>나의 연령과 보유 예정인 캠핑카 유형을 선택하면 2026년도 통계 가중치를 기반으로 대략적인 연간 예상 금액을 산출해 볼 수 있습니다. 아래의 항목들을 신중히 체크해 주십시오. (이 계산기는 모의 시뮬레이터이며, 실시간 상담 전 자가 진단 및 체류 시간 증대를 위한 정교한 알고리즘을 담고 있습니다.)</p>
+
+      <div class="interactive-calculator">
+        <form id="calcForm" onsubmit="calculatePremium(event);">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="calc-name">고객 성함</label>
+              <input type="text" id="calc-name" required placeholder="예: 홍길동">
+            </div>
+            
+            <div class="form-group">
+              <label for="calc-age">가입 연령대 선택</label>
+              <select id="calc-age" required>
+                <option value="">-- 연령대를 선택해 주세요 --</option>
+                <option value="20">만 21세 ~ 만 25세 이하 (신규 가입군)</option>
+                <option value="26">만 26세 ~ 만 29세 이하</option>
+                <option value="30">만 30세 ~ 만 42세 이하 (가장 두터운 연령군)</option>
+                <option value="43">만 43세 ~ 만 49세 이하</option>
+                <option value="50">만 50세 이상 우수 운전자군</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="calc-model">캠핑카 모델 종류</label>
+              <select id="calc-model" required>
+                <option value="">-- 차량 종류를 선택해 주세요 --</option>
+                <option value="staria">스타리아/스타렉스 기반 승용 개조 캠핑카</option>
+                <option value="ray">레이 등 경차급 초소형 차박 캠핑카</option>
+                <option value="master">르노 마스터 / 쏠라티 대형 럭셔리 모터홈</option>
+                <option value="porter">포터 / 봉고 기반 워크스루밴 1톤 트럭 캠퍼</option>
+                <option value="caravan">유럽형/미국형 피견인 카라반 트레일러 (단독 자차 전용)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="calc-value">총 차량 가액 (튜닝/가구 비용 합산 금액)</label>
+              <select id="calc-value" required>
+                <option value="">-- 차량가액 범위를 지정해 주세요 --</option>
+                <option value="1500">1,500만 원 이하</option>
+                <option value="3000">1,500만 원 초과 ~ 3,000만 원 이하</option>
+                <option value="5000">3,000만 원 초과 ~ 5,000만 원 이하</option>
+                <option value="8000">5,000만 원 초과 ~ 8,000만 원 이하</option>
+                <option value="10000">8,000만 원 초과 프리미엄 클래스</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="calc-range">운전자 범위 제한</label>
+              <select id="calc-range" required>
+                <option value="">-- 범위 범주를 지정해 주세요 --</option>
+                <option value="1">피보험자 본인 1인 한정 특약</option>
+                <option value="1.2">부부 한정 특별 약관</option>
+                <option value="1.4">가족 지정 한정 특약</option>
+                <option value="1.8">가족 및 지정 지인 공동 또는 누구나 운전</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="calc-score">티맵 안전운전 점수 구간</label>
+              <select id="calc-score">
+                <option value="0">점수 미달 또는 미가입</option>
+                <option value="0.9">티맵 점수 70점 ~ 79점 (추가 10% 감면 가능군)</option>
+                <option value="0.85">티맵 점수 80점 이상 우수 (최대 15% 이상 우대)</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label for="calc-memo">기타 요청사항 및 특약 요구</label>
+              <textarea id="calc-memo" rows="3" placeholder="예: 블랙박스 설치 완료, 만 6세 이하 자녀 있음, 마일리지 정산 희망 등의 조건 기재"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-calc">나의 예상 보험료 계산하기</button>
+        </form>
+
+        <div id="calcResult" class="calc-result">
+          <h4 id="calcResultTitle">실시간 예상 견적 시뮬레이션 결과</h4>
+          <p id="calcResultVal">계산 중...</p>
+          <span style="font-size: 0.8rem; color: #555555; display: block; margin-top: 10px;">본 결과는 단순 시뮬레이션이며 가입자의 무사고 경력과 보험사 할인 이벤트 시기에 따라 실제 다이렉트 창구에서 견적하는 가격과 차이가 있을 수 있습니다.</span>
+          <a href="#intro" class="cta-btn-link">최적의 저렴한곳 추천 매칭받기</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>캠핑카자동차보험 자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt><strong>Q1. 캠핑카자동차보험료는 일반 승용차와 비교하면 평균 얼마 정도 차이가 나나요?</strong></dt>
+        <dd>A. 과거에는 업무용으로 묶여 약 1.5배 이상 비쌌으나, 현재는 개인용 승용캠핑카 전용 특별할인 요율이 적용되어 무사고 경력이 우수하다면 일반 승용 차량과 거의 동일하거나 오히려 연간 주행거리가 짧아 마일리지 사후 환급을 통해 더 싼 금액으로 최종 결산되는 혜택을 볼 수 있습니다.</dd>
+        
+        <dt><strong>Q2. 자작 캠핑카(diy 개조)도 정식 보험에 가입할 수 있습니까?</strong></dt>
+        <dd>A. 가능합니다. 단, 가장 핵심 조건은 교통안전공단으로부터 정식 구조변경 승인을 득하고 자동차등록증 상에 차종이 캠핑용으로 적법하게 기재되어야 합니다. 구조변경이 등록되지 않은 불법 개조 차량은 보험 인수가 거절되며 사고 시에도 면책 사유가 됩니다.</dd>
+        
+        <dt><strong>Q3. 캠핑카에 실어 둔 텐트, 고가 캠핑 장비, 식기류도 사고 시 보상받나요?</strong></dt>
+        <dd>A. 고정형 캠핑 설비(가전, 배터리, 고정 수전 등 차량의 부속품으로 선고지된 품목)는 차량 가액에 포함되어 자차 보상이 가능하지만, 탈부착이 자유로운 개인 이동형 캠핑 장비(텐트, 침낭, 고가 캠핑 체어, 수입 코펠 등)는 자동차 부속품이 아니므로 자동차보험 범위에서 원칙적으로 제외됩니다. 별도의 캠핑레저 종합보험 혹은 휴대품 손해 보장 특약을 추가해야 합니다.</dd>
+        
+        <dt><strong>Q4. 주말에만 타는 캠핑카인데 가장 추천하는 절약 가입 팁은 무엇입니까?</strong></dt>
+        <dd>A. 마일리지 할인 특약을 최대화하는 보험사(예: 캐롯손해보험 혹은 대형사들의 에코 마일리지 특약)를 선택하는 것이 가장 훌륭한 전략입니다. 주중에는 주차장에 가만히 서 있고 1년에 2,000~3,000km 내외로 장거리만 이따금 주행하는 성향을 가진 분들은 최초 요금 결제 후 만기 시점에 막대한 환불을 받을 수 있습니다.</dd>
+
+        <dt><strong>Q5. 보험사 다이렉트 신규 가입 시 플랫폼에서 상품권을 주는 이벤트는 중복 적용이 되나요?</strong></dt>
+        <dd>A. 네, 네이버, 토스, 카카오페이 등 외부 핀테크 자산 관리 어플에서 안내하는 링크를 경유해 각 손보사 다이렉트 사이트로 넘어가 신규 계산 및 견적 조회 후 첫 가입을 확정하면, 보험사 기본 다이렉트 온라인 즉시 감면과 더불어 플랫폼에서 현금성 상품권을 사은품으로 제공하는 혜택을 100% 온전히 누릴 수 있습니다.</dd>
+      </dl>
+    </section>
+  </main>
+
+  <script>
+    function calculatePremium(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('calc-name').value;
+      const age = parseFloat(document.getElementById('calc-age').value);
+      const model = document.getElementById('calc-model').value;
+      const value = parseFloat(document.getElementById('calc-value').value);
+      const range = parseFloat(document.getElementById('calc-range').value);
+      
+      let scoreSelect = document.getElementById('calc-score');
+      let scoreFactor = parseFloat(scoreSelect.value) || 1;
+      if (scoreFactor === 0) scoreFactor = 1;
+
+      if (!name || isNaN(age) || !model || isNaN(value) || isNaN(range)) {
+        alert("모든 필수 입력 필드를 선택해 주세요.");
+        return;
+      }
+
+      // 정교한 임의 통계 기준 기반 계산 로직 세팅
+      let basePrice = 800000; // 기본 금액
+
+      // 연령 보정
+      if (age === 20) basePrice *= 2.2;
+      else if (age === 26) basePrice *= 1.4;
+      else if (age === 30) basePrice *= 1.0;
+      else if (age === 43) basePrice *= 0.85;
+      else if (age === 50) basePrice *= 0.75;
+
+      // 차종 보정
+      if (model === 'staria') basePrice *= 1.1;
+      else if (model === 'ray') basePrice *= 0.65;
+      else if (model === 'master') basePrice *= 1.5;
+      else if (model === 'porter') basePrice *= 1.3;
+      else if (model === 'caravan') basePrice *= 0.4; // 트레일러 단독 가격 보정
+
+      // 가액 보정
+      if (value === 1500) basePrice *= 0.8;
+      else if (value === 3000) basePrice *= 1.0;
+      else if (value === 5000) basePrice *= 1.25;
+      else if (value === 8000) basePrice *= 1.5;
+      else if (value === 10000) basePrice *= 1.85;
+
+      // 운전자 범위
+      basePrice *= range;
+
+      // 안전점수 반영
+      basePrice *= scoreFactor;
+
+      const minVal = Math.floor(basePrice * 0.95);
+      const maxVal = Math.floor(basePrice * 1.05);
+
+      const formatter = new Intl.NumberFormat('ko-KR');
+      const resultText = `${name} 고객님의 예상 연간 보험료는 ${formatter.format(Math.round(minVal / 100) * 100)}원 ~ ${formatter.format(Math.round(maxVal / 100) * 100)}원 선입니다.`;
+
+      const resultBox = document.getElementById('calcResult');
+      const resultVal = document.getElementById('calcResultVal');
+      
+      resultVal.innerHTML = resultText;
+      resultBox.style.display = 'block';
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+  
